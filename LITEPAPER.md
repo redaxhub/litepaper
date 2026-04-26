@@ -18,7 +18,7 @@ REDAX Hub is a Solana program that lets any project run a token migration campai
 
 A project opens a campaign, defines what old tokens it accepts and at what rate, and users convert their old tokens into the new one through one program. The conversion is atomic and the math is precise. The platform charges a small fee on the new token plus a flat campaign creation fee in SOL.
 
-We call the category **Merger-as-a-Service**. To our knowledge, REDAX is the first protocol to offer it on Solana as a permissionless factory.
+We call the category **Merger-as-a-Service**. REDAX is designed to define a Solana-native Merger-as-a-Service category through a reusable campaign factory.
 
 
 ## The Problem
@@ -35,7 +35,7 @@ The structural consequences of this distribution are visible across the ecosyste
 
 **Capital cannot reform around viable ideas.** A team that wants to do a clean v2 has to either ignore its v1 holders or build migration infrastructure from scratch — a cost that prevents most healthy relaunches from happening.
 
-Today, every project that wants to do a token migration faces the same set of tasks: write a custom Rust program, pay for a dedicated audit, build a custom user interface, and coordinate community communication. This typically costs between thirty and one hundred thousand dollars and takes two to four months. Most projects cannot afford it. So the migration never happens, and the community stays trapped.
+Today, every project that wants to do a token migration faces the same set of tasks: write a custom Rust program, pay for a dedicated audit, build a custom user interface, and coordinate community communication. This can require significant engineering, audit, interface, and coordination work - often beyond what small teams can afford. Most projects cannot afford it. So the migration never happens, and the community stays trapped.
 
 
 ## Our Solution
