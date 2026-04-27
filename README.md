@@ -14,8 +14,8 @@ The full whitepaper and technical specification are private for now.
 
 ## Links
 
-- Website: https://redaxhub.com
-- Docs: https://docs.redaxhub.com
+- Website: https://redaxhub.com/
+- Docs: https://docs.redaxhub.com/
 - X: https://x.com/redaxhub
 - Telegram: https://t.me/redaxhub
 

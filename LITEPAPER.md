@@ -262,13 +262,13 @@ This document will be revised as the protocol develops. Each version will be tim
 
 ## Contact
 
-**Web** — https://redaxhub.com  
-**Documentation** — https://docs.redaxhub.com  
+**Web** — https://redaxhub.com/  
+**Documentation** — https://docs.redaxhub.com/  
 **GitHub** — https://github.com/redaxhub  
 **X (Twitter)** — [@redaxhub](https://x.com/redaxhub)  
 **Telegram** — https://t.me/redaxhub  
 
-**Email** — hello@redaxhub.com (activation in progress)
+**Email** — hello@redaxhub.com
 
 This document has been prepared for community review and advisory feedback. It is not a fundraising prospectus, an investment offering, or a commitment to launch any token. It describes a protocol under development.
 
