@@ -6,7 +6,7 @@ REDAX Hub is Solana-native Merger-as-a-Service infrastructure for campaign-based
 
 Public draft for community and advisory feedback.
 
-The full whitepaper and technical specification are private for now.
+The full whitepaper remains private. The public protocol specification is available at https://github.com/redaxhub/spec. Production implementation code remains private until audit completion.
 
 ## Documents
 
@@ -16,7 +16,6 @@ The full whitepaper and technical specification are private for now.
 
 - Website: https://redaxhub.com/
 - Docs: https://docs.redaxhub.com/
-- X: https://x.com/redaxhub
 - Telegram: https://t.me/redaxhub
 
 ## Notice

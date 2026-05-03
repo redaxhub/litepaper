@@ -78,7 +78,7 @@ REDAX is structured as a hierarchy of program-derived addresses (PDAs). Every ac
 ProtocolConfig (singleton)
   └── Campaign (one per migration)
         ├── TokenConfig (one per accepted legacy token)
-        ├── CampaignTreasury (output-token escrow)
+        ├── protocol_fee_vault (REDAX protocol fee vault)
         └── DustAccumulator (rounding residue)
 ```
 
@@ -90,7 +90,7 @@ A single conversion executes this sequence in one atomic transaction:
 2. The program verifies the campaign is active, the token is enabled in this campaign, and the per-token cap will not be exceeded.
 3. The program receives the legacy token from the holder. In Phase 1 (burn mode), the tokens are destroyed.
 4. The program computes the conversion using `u128` precision math, determines the gross output amount, and calculates the fee.
-5. The program mints the net output (gross minus fee) to the holder and the fee to the campaign treasury.
+5. The program mints the net output (gross minus fee) to the holder and the fee to `protocol_fee_vault`, REDAX's protocol fee vault.
 6. The program emits an event capturing the full transaction breakdown for indexers and analytics.
 
 The conversion is irreversible. The user cannot undo it. The campaign cannot reverse it. This is intentional — auditable irreversibility is a security property, not a limitation.
@@ -126,7 +126,7 @@ A future technical document will describe the algorithm in full, with worked exa
 
 ## Treasury Policy — Where the Fees Go
 
-When the protocol takes a 1% fee on conversions, that fee accumulates in the campaign treasury as the new token. This raises a question: what does REDAX do with these tokens?
+When the protocol takes a 1% fee on conversions, that fee accumulates in `protocol_fee_vault` as the new token. This is REDAX's protocol fee vault, not the project's treasury. `project_treasury` is external, off-protocol, and controlled by `output_governance`.
 
 Selling them immediately on the open market would create sell pressure on the new token, harming the campaign creator and the holders who just converted. Holding them forever would mean only paper revenue, never realized.
 
@@ -149,7 +149,7 @@ REDAX collects fees through three channels:
 
 **Campaign creation fee — 0.5 SOL (one-time, per campaign).** Paid by the campaign creator at the time the campaign is opened. Goes directly to the protocol treasury in SOL. This covers the rent for PDA creation and prevents low-effort spam.
 
-**Output fee — 1% (per conversion).** Paid in the new token, on every conversion. Accumulates in the campaign treasury and is managed under the chosen treasury policy.
+**Output fee — 1% (per conversion).** Paid in the new token, on every conversion. Accumulates in `protocol_fee_vault` and is managed under the chosen treasury policy.
 
 **Optional convert fee — 0.001 SOL (Phase 2, anti-spam).** A small SOL fee on each conversion, activated only if we observe DDoS-style abuse. Sub-cent in normal usage.
 
@@ -162,11 +162,11 @@ This is the path Jupiter took: years of operation as a fee-generating product be
 
 REDAX ships in three phases. Each phase has explicit gating criteria.
 
-**Phase 1 — Burn-only MVP.** Everything described in this document, with one omission: legacy tokens are destroyed at conversion time, not held in a vault. This is the simplest, safest, most auditable version of the protocol. Target deployment: late Q3 2026 (subject to audit completion).
+**Phase 1 — Burn-only MVP.** Everything described in this document, with one omission: legacy tokens are destroyed at conversion time, not held in a vault. This is the simplest, safest, most auditable version of the protocol. Q4 2026 target, subject to audit completion.
 
-**Phase 2 — Hardening.** Verified tier (a UI distinction for campaigns that pass a baseline trust check), Token-2022 extension allowlist registry, rate updates with timelock and holder opt-out, custom indexer for the discovery UI, and bug bounty program. Target: Q4 2026.
+**Phase 2 — Hardening.** Verified tier (a UI distinction for campaigns that pass a baseline trust check), Token-2022 extension allowlist registry, rate updates with timelock and holder opt-out, custom indexer for the discovery UI, and bug bounty program. Planned for Q1-Q2 2027.
 
-**Phase 3 — Lock and Liquidity Recovery.** Lock mode introduces a vault where legacy tokens are held instead of burned. Crank operations could then route accumulated legacy tokens through Solana DEX infrastructure to recover SOL from low-activity liquidity pools. The technical mechanism is designed; the legal and regulatory framework around it is not yet settled.
+**Phase 3 — Lock and Liquidity Recovery.** 2027+, conditional on legal clearance. Lock mode introduces a vault where legacy tokens are held instead of burned. Crank operations could then route accumulated legacy tokens through Solana DEX infrastructure to recover SOL from low-activity liquidity pools. The technical mechanism is designed; the legal and regulatory framework around it is not yet settled.
 
 **Important note on Phase 3.** This phase raises questions — about asset ownership in the lock state, about how crank operations are classified across jurisdictions — that we have not resolved. We are working with external counsel to clarify these. **Phase 3 is fully gated on the resolution of these legal questions. If the legal risk is determined to be unmanageable, Phase 3 will be removed from the protocol or substantially redesigned.**
 
@@ -241,9 +241,9 @@ A boutique Solana audit firm will be selected for the Phase 1 boutique audit fro
 |---|---|
 | Q2 2026 | SPEC v1 finalization · Devnet deployment · Public testnet preparation |
 | Q3 2026 | Tier 2 audit · Tier 3 audit · Solana Foundation grant outreach · Guarded mainnet preparation |
-| Q4 2026 | Phase 2 features · Verified tier · Solana Frontier Hackathon submission |
-| Q4 2026 (late) | Tier 4 audit · Bug bounty live · Open mainnet |
-| 2027 | Phase 3 (subject to legal clearance) · Multi-campaign discovery UI · Custom indexer |
+| Q4 2026 | Phase 1 guarded mainnet target · Solana Frontier Hackathon submission |
+| Q1-Q2 2027 | Phase 2 features · Verified tier · Bug bounty planned |
+| 2027+ | Phase 3, conditional on legal clearance · Multi-campaign discovery UI · Custom indexer |
 
 These dates are targets, not commitments. We will delay any milestone if quality requirements are not met. We would rather ship a slow, working protocol than a fast, fragile one.
 
@@ -265,7 +265,6 @@ This document will be revised as the protocol develops. Each version will be tim
 **Web** — https://redaxhub.com/  
 **Documentation** — https://docs.redaxhub.com/  
 **GitHub** — https://github.com/redaxhub  
-**X (Twitter)** — [@redaxhub](https://x.com/redaxhub)  
 **Telegram** — https://t.me/redaxhub  
 
 **Email** — hello@redaxhub.com
