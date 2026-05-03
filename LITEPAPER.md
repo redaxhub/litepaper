@@ -14,7 +14,7 @@
 
 ## What is REDAX Hub?
 
-REDAX Hub is a Solana program that lets any project run a token migration campaign through a single audited factory, instead of writing a custom contract and paying for a dedicated audit each time.
+REDAX Hub is a Solana program that lets any project run a token migration campaign through a single reusable factory designed for auditability, instead of writing a custom contract and paying for a dedicated audit each time.
 
 A project opens a campaign, defines what old tokens it accepts and at what rate, and users convert their old tokens into the new one through one program. The conversion is atomic and the math is precise. The platform charges a small fee on the new token plus a flat campaign creation fee in SOL.
 
@@ -40,7 +40,7 @@ Today, every project that wants to do a token migration faces the same set of ta
 
 ## Our Solution
 
-REDAX builds the migration factory once, audits it once, and lets any project use it.
+REDAX builds the migration factory once, subjects it to staged security review before mainnet, and lets any project use it after the required launch gates are met.
 
 The flow is simple.
 
@@ -219,7 +219,7 @@ We did not invent the idea of a token merger. We are generalizing patterns that 
 
 **Ribbon to Aevo (2023).** Ribbon DAO approved the merger of Ribbon Finance into Aevo. The transition used a 1:1 swap structure and is one of several precedents for orderly v1-to-v2 token transitions on EVM chains.
 
-**Existing Solana factories.** Streamflow demonstrates that Solana teams already adopt audited, reusable infrastructure for token operations such as vesting, locks, airdrops, and payroll. Squads provides multisig-as-a-service. Realms provides DAO-as-a-service. Each demonstrates that a single audited factory can serve a heterogeneous set of project needs at low marginal cost. REDAX extends this pattern into the merger domain.
+**Existing Solana factories.** Streamflow demonstrates that Solana teams already adopt audited, reusable infrastructure for token operations such as vesting, locks, airdrops, and payroll. Squads provides multisig-as-a-service. Realms provides DAO-as-a-service. Each demonstrates that a single reusable, audit-ready factory can serve a heterogeneous set of project needs at low marginal cost. REDAX extends this pattern into the merger domain.
 
 **Sol-Incinerator.** A Solana wallet cleanup tool that lets users dispose of dust tokens and recover rent SOL. Operates on the user-side of the dead-token problem. REDAX operates on the project-side: instead of burning dust for rent, REDAX helps the project bring its community forward into a new token.
 
